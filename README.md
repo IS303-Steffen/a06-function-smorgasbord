@@ -72,7 +72,7 @@ Remember to use the AI Assistant, linked above!
     - `num`:
         - an integer.
 - *logic and return values*:
-    - You need to call `is_even` from within `check_number`. It should return `<number> is even.` if the number is even or `<number> is odd.` if the number is odd.
+    - You need to call `is_even` from within `get_number_parity`. It should return `<number> is even.` if the number is even or `<number> is odd.` if the number is odd.
 - *calling the function*:
     - In `a6_function_smorgasbord.py`, call the function with 5 as the argument and print out the result. Then call it again with the number 10 and print the result.
 
