@@ -157,7 +157,7 @@ Remember to use the AI Assistant, linked above!
     - `bonus_discount`:
         - a percent expressed as a decimal (float). Represents the discount that will be added to the `discount_percent` if the `threshold_total` is met. The default value should be 0.02.
 - *logic and return values*:
-    - The function should calculate the total price (`price * quantity`) and then apply a discount. 
+    - The function should calculate the total price (`price * quantity`), and depending on the total price, the discount applied will be different. 
     - If the total price is equal to or below the `threshold_total`, then the discount applied would just be the `discount_percent`.
     - If the total price is above the `threshold_total`, then the applied discount should be the `discount_percent + bonus_discount`.
     - Return the total price, rounded to the second decimal, after the discount is applied.
@@ -181,7 +181,8 @@ Push your code up to your GitHub repository to receive credit. If you pass all t
 
 ## Example Output
 
-```Hello Diego, welcome to IS 303!
+```
+Hello Diego, welcome to IS 303!
 Hello Mai, welcome to IS 303!
 12
 970.5
@@ -633,7 +634,8 @@ After this table, see the Test Cases table below to see what inputs will be run 
 
 <h4>Example Ouput:</h4>
 
-```Hello Diego, welcome to IS 303!
+```
+Hello Diego, welcome to IS 303!
 Hello Mai, welcome to IS 303!
 12
 970.5
@@ -721,7 +723,8 @@ The total price after discounts is: $110.0
 
 <h4>Example Ouput:</h4>
 
-```Hello Diego, welcome to IS 303!
+```
+Hello Diego, welcome to IS 303!
 Hello Mai, welcome to IS 303!
 12
 970.5
