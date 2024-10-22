@@ -49,6 +49,7 @@ Remember to use the AI Assistant, linked above!
     - add `a` and `b` together and return the sum
 - *calling the function*
     - In `a6_function_smorgasbord.py`, call `sum_two_numbers` with 5 and 7 as arguments, and then make another call with 1000.5 and -30 as arguments. Print out the result of each call.
+    - IMPORTANT: Make sure you save both your `a6_my_functions.py` AND `a6_function_smorgasbord.py` before running your code for it to find any functions properly. You can save every file with changes in VS Code by going to File > Save All, or use the keyboard shortcuts `cmd + opt + s` on Mac or `ctrl + k` then release and press `s` on Windows.
     
 ### Function 3: is_even
 - *location*:
