@@ -3,46 +3,43 @@ from conftest import normalize_text, load_student_code, format_error_message, ex
 import pytest
 
 # Checks if the input prompts (from using input()) contain the expected prompts.
-def test_06_min_max_mean(test_cases):
+def test_06_min_max_mean(current_test_name, input_test_cases, function_test_cases):
     try:
         # Ensure test_cases is valid and iterable
-        if not isinstance(test_cases, list):
-            test_case = {"id_test_case": None}
-            exception_message_for_students(ValueError("test_cases should be a list of dictionaries. Contact your professor."), test_case=test_case) 
+        if not isinstance(input_test_cases, list):
+            input_test_case = {"id_test_case": None}
+            exception_message_for_students(ValueError("test_cases should be a list of dictionaries. Contact your professor."), test_case=input_test_case) 
             return  # Technically not needed, as exception_message_for_students throws a pytest.fail Error, but included for clarity that this ends the test.
 
-        test_case = test_cases[0]
+        input_test_case = input_test_cases[0]
         function_being_tested = 'min_max_mean'
-        function_tests = {function_being_tested: [
-            # function test cases. Inputs in first position, expected output in second position.
-            # If a function takes only a single input, be sure to include a comma after the value so that
-            # python recognizes it as a tuple.
-            [([1,2,3],), [1, 3, 2.0]],
-            [([354, 87, -7, 92, 34],), [-7, 354, 112.0]],
-            ]}
+        fuction_test_cases_payload = function_test_cases.get(function_being_tested)
 
         # Grab the necessary data from the test case dictionary
-        inputs = test_case["inputs"]
+        inputs = input_test_case["inputs"]
 
         # Load in the student's code using the updated function
-        _, _, _, function_results = load_student_code(inputs, test_case, function_tests=function_tests)
+        manager_payload = load_student_code(current_test_name, inputs, input_test_case, function_tests=fuction_test_cases_payload)
 
+        function_results = manager_payload['function_results']
         if function_results.get("FUNCTION ERROR") is not None:
             pytest.fail(f"{format_error_message(
-                custom_message=(f"{function_results.get("FUNCTION ERROR")}\n\n"), 
-                test_case=test_case,
+                custom_message=(f"{function_results.get("FUNCTION ERROR").get('message')}\n\n"), 
+                current_test_name=current_test_name,
+                input_test_case=input_test_case,
                 )}")
             
-        test_results = function_results.get(function_being_tested)
+        test_results = function_results.get('function_results')
 
-        for index, actual_result in enumerate(test_results):
-            test_inputs = function_tests.get(function_being_tested)[index][0]
+        for test_result in test_results:
+            test_inputs = test_result.get('args')
             test_inputs_str = ', '.join(str(item) for item in test_inputs)
-            expected_result = function_tests.get(function_being_tested)[index][1]
-
-            # if the returned value is a string, it will normalize it.
-            actual_result = normalize_text(actual_result)
+            
+            expected_result = test_result.get('expected_return_value')
             expected_result = normalize_text(expected_result)
+
+            actual_result = test_result.get('actual_return_value')[0] # Results are returned in lists. Normally, we only care about the test being run once.
+            actual_result = normalize_text(actual_result)
 
             assert actual_result == expected_result, format_error_message(
                 custom_message=(f"When the function: {function_being_tested}\nis provided with the following argument(s):\n\n"
@@ -55,8 +52,9 @@ def test_06_min_max_mean(test_cases):
                                 f"what the instructions say. If the message above says your function is returning \"None\" when it shouldn't, "
                                 f"that means your function likely doesn't have a return statement. Make sure you are returning "
                                 f"a value, not just printing it out directly in the function."),
-                test_case=test_case,
-            ) 
+                current_test_name=current_test_name,
+                input_test_case=input_test_case,
+            )
 
     # assert raises an AssertionError, but I don't want to actually catch it
     # this is just so I can have another Exception catch below it in case
@@ -66,4 +64,4 @@ def test_06_min_max_mean(test_cases):
     
     except Exception as e:
         # Handle other exceptions
-        exception_message_for_students(e, test_case)
+        exception_message_for_students(e, input_test_case, current_test_name)

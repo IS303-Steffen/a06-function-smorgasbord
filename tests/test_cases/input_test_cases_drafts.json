@@ -1,7 +1,7 @@
 [
     {
-        "id_test_case": 1,
-        "test_case_description": "Using 5 as product price, different quantities",
+        "id_input_test_case": 1,
+        "input_test_case_description": "Using 5 as product price, different quantities",
         "inputs": [
             "5",
             "15",
@@ -63,8 +63,8 @@
         "example_output": "Hello Diego, welcome to IS 303!\nHello Mai, welcome to IS 303!\n12\n970.5\nFalse\nTrue\n5 is odd.\n10 is even.\n0.0\n23.88888888888889\n[2, 87, 30.0]\nI am a dog named Spot and I'm 7 years old!\nI am a dog named Peppy and I'm 0 years old!\nSenior\nAdult\nEnter the price for the product purchased: 5\nEnter the quantity of the product purchased: 15\nEnter the discount percent (formatted as a decimal): .1\nThe total price after discounts is: $67.5\nEnter the price for the product purchased: 5\nEnter the quantity of the product purchased: 25\nEnter the discount percent (formatted as a decimal): .1\nThe total price after discounts is: $110.0"
     },
     {
-        "id_test_case": 2,
-        "test_case_description": "Different prices and quantities",
+        "id_input_test_case": 2,
+        "input_test_case_description": "Different prices and quantities",
         "inputs": [
             "2",
             "2000",
