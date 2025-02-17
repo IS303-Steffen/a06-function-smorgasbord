@@ -1,2 +1,2 @@
 # Name:
-# You will place most of your functions for this assignment in this file.
+# You will define most of your functions for this assignment in this file.
