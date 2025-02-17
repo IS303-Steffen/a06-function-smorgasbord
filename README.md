@@ -1,4 +1,4 @@
-#### Assignment 6
+#### Assignment 7
 # Function Smorgasbord
 The purpose of this assignment is twofold:
 1. Practice the basics of writing functions in python.
