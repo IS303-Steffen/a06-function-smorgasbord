@@ -7,6 +7,8 @@ test_cases_table_output.html
 test_cases_drafts.json
 markdown_generated.md
 post_test.py
+*.pdf
+*_pdf_*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
