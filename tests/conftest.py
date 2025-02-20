@@ -19,8 +19,8 @@ current_dir = os.path.dirname(__file__)
 test_cases_path = os.path.join(current_dir, "test_cases")
 sys.path.append(test_cases_path)
 
-from class_test_cases import test_cases_classes_dict
-from function_test_cases import test_cases_functions_dict
+from class_test_cases import test_cases_classes_dict # type: ignore
+from function_test_cases import test_cases_functions_dict # type: ignore
 
 
 # ================
