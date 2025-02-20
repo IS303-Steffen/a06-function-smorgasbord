@@ -23,11 +23,13 @@ def test_09_calculate_total(current_test_name, input_test_cases, function_test_c
 
         function_results = manager_payload['function_results']
         if function_results.get("FUNCTION ERROR") is not None:
-            pytest.fail(f"{format_error_message(
-                custom_message=(f"{function_results.get("FUNCTION ERROR").get('message')}\n\n"), 
-                current_test_name=current_test_name,
-                input_test_case=input_test_case,
-                )}")
+            custom_message = (f"{function_results.get('FUNCTION ERROR').get('message')}\n\n")
+            formatted_message = format_error_message(
+                                    custom_message=custom_message, 
+                                    current_test_name=current_test_name,
+                                    input_test_case=input_test_case,
+                                    )
+            pytest.fail(formatted_message)
             
         test_results = function_results.get('function_results')
 

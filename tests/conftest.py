@@ -7,10 +7,20 @@ if they reference it as a parameter.
 import pytest, re, sys, os, json, traceback, pickle, inspect, multiprocessing, ast, importlib, difflib, copy, builtins
 from io import StringIO
 from collections.abc import Iterable
-from tests.test_cases.class_test_cases import test_cases_classes_dict
-from tests.test_cases.function_test_cases import test_cases_functions_dict
+# from tests.test_cases.class_test_cases import test_cases_classes_dict
+# from tests.test_cases.function_test_cases import test_cases_functions_dict
 from datetime import date, timedelta
 import importlib
+
+# Get the absolute path of the directory containing this script
+current_dir = os.path.dirname(__file__)
+
+# Construct the path to 'test_cases' and add it to sys.path
+test_cases_path = os.path.join(current_dir, "test_cases")
+sys.path.append(test_cases_path)
+
+from class_test_cases import test_cases_classes_dict
+from function_test_cases import test_cases_functions_dict
 
 
 # ================
@@ -1015,46 +1025,54 @@ def exception_message_for_students(exception_data, input_test_case, current_test
         input_test_case['input_test_case_description'] =  "No input test case for this test."
 
     if error_type == "StopIteration":
-        pytest.fail(f"{format_error_message(
-            custom_message=(f"While trying to run {current_test_name}, the automated test couldn't complete because your code "
-                            f"called an input() function more times than it should have.\n\n"
-                            f"{error_message}\n\n"),
-            current_test_name=current_test_name,
-            input_test_case=input_test_case,
-            )}")
+        custom_message = (f"While trying to run {current_test_name}, the automated test couldn't complete because your code "
+            f"called an input() function more times than it should have.\n\n"
+            f"{error_message}\n\n")
+
+        formatted_message = format_error_message( 
+                                custom_message=custom_message,
+                                current_test_name=current_test_name,
+                                input_test_case=input_test_case)
+
+        pytest.fail(formatted_message)
 
     elif error_detail in ["CLASS ERROR", "FUNCTION ERROR"]:
-        pytest.fail(f"{format_error_message(
-            custom_message=(f"While trying to run {current_test_name}, python ran into an error.\n\n"
-                            f"LOCATION OF ERROR:\n"
-                            f"------------------"
-                            f"\n{error_location}\n\n"
-                            f"ERROR MESSAGE:\n"
-                            f"--------------"
-                            f"{error_message}\n\n"),
-            current_test_name=current_test_name,
-            input_test_case=input_test_case,
-            )}")
+        custom_message = (f"While trying to run {current_test_name}, python ran into an error.\n\n"
+            f"LOCATION OF ERROR:\n"
+            f"------------------"
+            f"\n{error_location}\n\n"
+            f"ERROR MESSAGE:\n"
+            f"--------------"
+            f"{error_message}\n\n")
+        
+        formatted_message = format_error_message(
+                                custom_message=custom_message,
+                                current_test_name=current_test_name,
+                                input_test_case=input_test_case)
+
+        pytest.fail(formatted_message)
     else:
-        # Call pytest.fail with the formatted error message
-        pytest.fail(f"{format_error_message(
-            custom_message=(f"While trying to run {current_test_name}, python ran into an error.\n\n"
-                            f"LOCATION OF ERROR:\n"
-                            f"------------------\n"
-                            f"{error_location}\n\n"
-                            f"ERROR MESSAGE:\n"
-                            f"--------------\n"
-                            f"{error_message}\n\n"
-                            f"HOW TO FIX IT:\n"
-                            f"--------------\n"
-                            f"If the error occurred in {default_module_to_test}.py or another .py file that you wrote, set a breakpoint at the location in that file where "
-                            f"the error occurred and see if you can repeat the error by running your code using the inputs for Test Case {input_test_case['id_input_test_case']}. "
-                            f"That should help you see what went wrong.\n\n"
-                            f"If the error occurred in a different file, reach out to your professor.\n\n"),
+        custom_message = (f"While trying to run {current_test_name}, python ran into an error.\n\n"
+            f"LOCATION OF ERROR:\n"
+            f"------------------\n"
+            f"{error_location}\n\n"
+            f"ERROR MESSAGE:\n"
+            f"--------------\n"
+            f"{error_message}\n\n"
+            f"HOW TO FIX IT:\n"
+            f"--------------\n"
+            f"If the error occurred in {default_module_to_test}.py or another .py file that you wrote, set a breakpoint at the location in that file where "
+            f"the error occurred and see if you can repeat the error by running your code using the inputs for Test Case {input_test_case['id_input_test_case']}. "
+            f"That should help you see what went wrong.\n\n"
+            f"If the error occurred in a different file, reach out to your professor.\n\n")
+        
+        formatted_message = format_error_message(
+            custom_message=custom_message,
             current_test_name=current_test_name,
             input_test_case=input_test_case,
-            display_inputs=display_inputs_option
-            )}")
+            display_inputs=display_inputs_option)
+        # Call pytest.fail with the formatted error message
+        pytest.fail(formatted_message)
 
 def timeout_message_for_students(input_test_case, current_test_name):
     """
