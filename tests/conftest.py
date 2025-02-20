@@ -3,14 +3,19 @@ conftest.py is a configuration file automatically accessed by pytest
 any @pytest.fixture created here is available to any other test file
 if they reference it as a parameter.
 '''
+# =======
+# IMPORTS
+# =======
 
-import pytest, re, sys, os, json, traceback, pickle, inspect, multiprocessing, ast, importlib, difflib, copy, builtins
+import pytest, re, sys, os, json, traceback, pickle, inspect, multiprocessing, \
+       ast, importlib, difflib, copy, builtins
 from io import StringIO
 from collections.abc import Iterable
-# from tests.test_cases.class_test_cases import test_cases_classes_dict
-# from tests.test_cases.function_test_cases import test_cases_functions_dict
 from datetime import date, timedelta
-import importlib
+
+# ====================
+# LOCAL MODULE IMPORTS
+# ====================
 
 # Get the absolute path of the directory containing this script
 current_dir = os.path.dirname(__file__)
