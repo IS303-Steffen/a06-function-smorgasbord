@@ -54,7 +54,7 @@ functions_module_to_test = detect_module(solution_functions_module, student_func
 
 
 # default per-test-case timeout amount in seconds:
-default_timeout_seconds = 700
+default_timeout_seconds = 7
 
 # default decimal place to round to for regex comparisons
 # helpful for accounting for different rounding methods students could use.
