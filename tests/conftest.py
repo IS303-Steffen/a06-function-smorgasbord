@@ -999,12 +999,13 @@ def test_functions(function_tests, globals_dict, instance=None):
                 break
 
         if not func_found:
+            newline = '\n' # this is just to make it compatible with older python versions.
             exception_data = {
                     'type': 'Function not found',
-                    'message': (f"This test is looking specifically for the function/method\n"
+                    'message': (f"This test is looking specifically for the function or method\n"
                                 f"```\n{func_name_original}\n```\n"
                                 f"in {context}, but it couldn't find it, nor any of its accepted variations:\n"
-                                f"```\n{'\n'.join(function_variations[1:])}\n```\n"
+                                f"```\n{newline.join(function_variations[1:])}\n```\n"
                                 f"Make sure you are spelling the function/method name correctly, and that you didn't name any other variables "
                                 f"in your code the exact same name as the function. Below are all of "
                                 f"the functions/methods that the test could find in {context}:\n"

@@ -60,9 +60,12 @@ def test_04_get_number_parity(current_test_name, input_test_cases, function_test
 
         for index, test_result in enumerate(test_results, start=1):
             test_inputs = test_result.get('args')
-            formatted_test_input = [f"{index}: {'\"' + item + '\"' if isinstance(item, str) else item} "
-                                    f"(data type: {type(item).__name__})"
-                                    for index, item in enumerate(test_inputs, start=1)]
+            formatted_test_input = [
+                f'{index}: "{item}" (data type: {type(item).__name__})'
+                if isinstance(item, str)
+                else f"{index}: {item} (data type: {type(item).__name__})"
+                for index, item in enumerate(test_inputs, start=1)
+            ]
             test_inputs_str = '\n'.join(formatted_test_input)
             
             expected_result = test_result.get('expected_return_value')
