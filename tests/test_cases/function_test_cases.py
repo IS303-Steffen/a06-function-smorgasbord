@@ -116,19 +116,19 @@ get_number_parity_3 = FunctionTestCase(
 fahrenheit_to_celsius_1 = FunctionTestCase(
     function_name='fahrenheit_to_celsius',
     args=[32],
-    expected_return_value=0,
+    expected_return_value=0.0,
 )
 
 fahrenheit_to_celsius_2 = FunctionTestCase(
     function_name='fahrenheit_to_celsius',
     args=[122],
-    expected_return_value=50,
+    expected_return_value=50.0,
 )
 
 fahrenheit_to_celsius_3 = FunctionTestCase(
     function_name='fahrenheit_to_celsius',
     args=[-13],
-    expected_return_value=-25,
+    expected_return_value=-25.0,
 )
 
 # ============
