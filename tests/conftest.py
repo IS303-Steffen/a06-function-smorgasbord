@@ -17,6 +17,10 @@ from datetime import date, timedelta
 # LOCAL MODULE IMPORTS
 # ====================
 
+# makes sure the root of the directory is added to the path for when running tests
+# through GitHub Actions.
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 # Get the absolute path of the directory containing this script
 current_dir = os.path.dirname(__file__)
 
